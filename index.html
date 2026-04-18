@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stacknity Technologies — Premium Tech Solutions & Elite Engineering</title>
+    <meta name="description"
+        content="Stacknity Technologies architects scalable technology solutions and deploys elite engineering teams. Mobile apps, web platforms, digital marketing & staff augmentation.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <canvas id="bg-canvas"></canvas>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="noise-overlay"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <div class="trust-ribbon">
+        <span>⚡ Trusted by 495+ Global Clients & Enterprises</span>
+    </div>
+
+    <nav id="mainNav">
+        <a href="#" class="logo">
+            <svg class="logo-icon" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="logoGrad1" x1="0%" y1="50%" x2="100%" y2="50%">
+                        <stop offset="0%" stop-color="#00E5FF" />
+                        <stop offset="40%" stop-color="#00b8d4" />
+                        <stop offset="60%" stop-color="#6B3FA0" />
+                        <stop offset="100%" stop-color="#8A2BE2" />
+                    </linearGradient>
+                    <linearGradient id="logoGrad2" x1="0%" y1="50%" x2="100%" y2="50%">
+                        <stop offset="0%" stop-color="#8A2BE2" />
+                        <stop offset="40%" stop-color="#6B3FA0" />
+                        <stop offset="60%" stop-color="#00b8d4" />
+                        <stop offset="100%" stop-color="#00E5FF" />
+                    </linearGradient>
+                    <filter id="logoGlow">
+                        <feGaussianBlur stdDeviation="2" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                </defs>
+                <!-- Bottom ribbon (drawn first, appears behind at crossing) -->
+                <path d="M100 50 C78 78, 28 85, 12 62 C-4 39, 10 12, 40 12 C58 12, 78 25, 100 50"
+                    stroke="url(#logoGrad1)" stroke-width="8" fill="none" stroke-linecap="round"
+                    filter="url(#logoGlow)" />
+                <!-- Top ribbon (drawn second, appears in front at crossing) -->
+                <path d="M100 50 C122 22, 172 15, 188 38 C204 61, 190 88, 160 88 C142 88, 122 75, 100 50"
+                    stroke="url(#logoGrad2)" stroke-width="8" fill="none" stroke-linecap="round"
+                    filter="url(#logoGlow)" />
+                <!-- Center intersection glow -->
+                <circle cx="100" cy="50" r="5" fill="white" opacity="0.8">
+                    <animate attributeName="r" values="4;6;4" dur="2.5s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" repeatCount="indefinite" />
+                </circle>
+            </svg>
+            <div class="logo-text">
+                <span class="logo-glass">Stacknity</span>
+                <small>Technologies</small>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#process">How We Work</a>
+            <a href="#team">Team</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#cta" class="nav-cta">Get Started</a>
+        </div>
+        <div class="mobile-toggle" id="mobileToggle">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Premium Tech Services</div>
+            <h1>Building Digital<br>Empires with<br><span class="highlight shimmer-text">Stacknity Precision.</span>
+            </h1>
+            <p>We architect scalable technology solutions and deploy elite engineering teams that transform ambitious
+                visions into market-leading products.</p>
+            <div class="hero-actions">
+                <a href="#cta" class="btn-primary">Start a Project <span>→</span></a>
+                <a href="#services" class="btn-secondary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                    Watch Reel
+                </a>
+            </div>
+        </div>
+        <div class="hero-3d">
+            <canvas id="hero-canvas"></canvas>
+        </div>
+    </section>
+
+    <div class="stats-bar">
+        <div class="stat-card reveal">
+            <div class="stat-number"><span class="counter" data-target="495">0</span><span
+                    class="counter-suffix">+</span></div>
+            <div class="stat-label">Clients Served Globally</div>
+        </div>
+        <div class="stat-card reveal">
+            <div class="stat-number"><span class="counter" data-target="120">0</span><span
+                    class="counter-suffix">+</span></div>
+            <div class="stat-label">Engineers Deployed</div>
+        </div>
+        <div class="stat-card reveal">
+            <div class="stat-number"><span class="counter" data-target="38">0</span><span class="counter-suffix"></span>
+            </div>
+            <div class="stat-label">Countries Reached</div>
+        </div>
+        <div class="stat-card reveal">
+            <div class="stat-number"><span class="counter" data-target="99">0</span><span
+                    class="counter-suffix">%</span></div>
+            <div class="stat-label">Client Retention Rate</div>
+        </div>
+    </div>
+
+    <!-- Tech Stack Marquee -->
+    <div class="tech-marquee">
+        <div class="tech-marquee-label">Technologies We Master</div>
+        <div class="marquee-track">
+            <div class="tech-item"><span class="tech-dot"></span>React</div>
+            <div class="tech-item"><span class="tech-dot"></span>Next.js</div>
+            <div class="tech-item"><span class="tech-dot"></span>Node.js</div>
+            <div class="tech-item"><span class="tech-dot"></span>Swift</div>
+            <div class="tech-item"><span class="tech-dot"></span>Kotlin</div>
+            <div class="tech-item"><span class="tech-dot"></span>Flutter</div>
+            <div class="tech-item"><span class="tech-dot"></span>Python</div>
+            <div class="tech-item"><span class="tech-dot"></span>AWS</div>
+            <div class="tech-item"><span class="tech-dot"></span>Google Cloud</div>
+            <div class="tech-item"><span class="tech-dot"></span>Docker</div>
+            <div class="tech-item"><span class="tech-dot"></span>Kubernetes</div>
+            <div class="tech-item"><span class="tech-dot"></span>TypeScript</div>
+            <div class="tech-item"><span class="tech-dot"></span>PostgreSQL</div>
+            <div class="tech-item"><span class="tech-dot"></span>Redis</div>
+            <!-- Duplicate for seamless loop -->
+            <div class="tech-item"><span class="tech-dot"></span>React</div>
+            <div class="tech-item"><span class="tech-dot"></span>Next.js</div>
+            <div class="tech-item"><span class="tech-dot"></span>Node.js</div>
+            <div class="tech-item"><span class="tech-dot"></span>Swift</div>
+            <div class="tech-item"><span class="tech-dot"></span>Kotlin</div>
+            <div class="tech-item"><span class="tech-dot"></span>Flutter</div>
+            <div class="tech-item"><span class="tech-dot"></span>Python</div>
+            <div class="tech-item"><span class="tech-dot"></span>AWS</div>
+            <div class="tech-item"><span class="tech-dot"></span>Google Cloud</div>
+            <div class="tech-item"><span class="tech-dot"></span>Docker</div>
+            <div class="tech-item"><span class="tech-dot"></span>Kubernetes</div>
+            <div class="tech-item"><span class="tech-dot"></span>TypeScript</div>
+            <div class="tech-item"><span class="tech-dot"></span>PostgreSQL</div>
+            <div class="tech-item"><span class="tech-dot"></span>Redis</div>
+        </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <section class="services" id="services">
+        <div class="section-label reveal">What We Do</div>
+        <h2 class="section-title reveal">Services engineered<br>for scale.</h2>
+        <p class="section-desc reveal">From concept to deployment, we deliver end-to-end technology solutions that power
+            growth-stage companies and global enterprises.</p>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-icon-wrap">📱</div>
+                <h3>Mobile Application</h3>
+                <p>Native iOS & Android apps built with Swift, Kotlin, and cross-platform frameworks. From MVP to
+                    enterprise-grade solutions.</p>
+                <div class="service-3d-container" id="svc3d-mobile"></div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon-wrap">🌐</div>
+                <h3>Website Development</h3>
+                <p>High-performance web platforms using React, Next.js, and modern stacks. SEO-optimized and
+                    conversion-focused.</p>
+                <div class="service-3d-container" id="svc3d-web"></div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon-wrap">📈</div>
+                <h3>Digital Marketing</h3>
+                <p>Data-driven campaigns that deliver measurable ROI. SEO, PPC, social media, and growth hacking
+                    strategies.</p>
+                <div class="service-3d-container" id="svc3d-marketing"></div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon-wrap">👥</div>
+                <h3>Staff Augmentation</h3>
+                <p>On-demand access to pre-vetted senior engineers. Seamless integration into your existing workflow and
+                    culture.</p>
+                <div class="service-3d-container" id="svc3d-staff"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- How We Work -->
+    <section class="process" id="process">
+        <div class="section-label reveal">How We Work</div>
+        <h2 class="section-title reveal">From idea to launch<br>in 4 steps.</h2>
+        <p class="section-desc reveal">Our proven methodology ensures every project is delivered on time, on budget, and
+            beyond expectations.</p>
+        <div class="process-grid">
+            <div class="process-step reveal">
+                <div class="process-number">01</div>
+                <h4>Discovery</h4>
+                <p>Deep-dive into your vision, goals, and technical requirements. We map the blueprint.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-number">02</div>
+                <h4>Architecture</h4>
+                <p>Design scalable system architecture and assemble the perfect engineering team.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-number">03</div>
+                <h4>Build & Iterate</h4>
+                <p>Agile development with weekly sprints, continuous integration, and transparent reporting.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-number">04</div>
+                <h4>Launch & Scale</h4>
+                <p>Deploy to production with monitoring, optimization, and ongoing support as you scale.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="testimonials" id="testimonials">
+        <div class="section-label reveal">Client Stories</div>
+        <h2 class="section-title reveal">Words from those<br>who built with us.</h2>
+        <p class="section-desc reveal">Real results from real partnerships. Here's what our clients have to say.</p>
+        <div class="testimonials-track">
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Stacknity didn't just give us developers; they gave us a dedicated team
+                    that understood our vision. The iOS app they built scaled from 0 to 100k downloads in 3 months."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">SJ</div>
+                    <div>
+                        <div class="testimonial-name">Sarah J.</div>
+                        <div class="testimonial-role">CTO of FinFlow</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"We needed 3 Senior Android Engineers urgently for a project pivot.
+                    Stacknity's staff augmentation sourced them in under a week. Flawless integration."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">DR</div>
+                    <div>
+                        <div class="testimonial-name">David R.</div>
+                        <div class="testimonial-role">VP Engineering at ShopSphere</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Their digital marketing strategy increased our B2B lead flow by 210%. Plus,
+                    the website they designed is a work of art."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">MT</div>
+                    <div>
+                        <div class="testimonial-name">Michael T.</div>
+                        <div class="testimonial-role">Founder of NexusCore</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="team" id="team">
+        <div class="section-label reveal">Meet The Architects</div>
+        <h2 class="section-title reveal">The minds behind<br>the mission.</h2>
+        <p class="section-desc reveal">A curated team of industry veterans driving innovation at every layer of the
+            stack.</p>
+        <div class="founder-card reveal">
+            <div class="founder-image">
+                <div class="founder-silhouette">
+                    <div class="head"></div>
+                    <div class="body"></div>
+                </div>
+            </div>
+            <div>
+                <div class="founder-tag">👑 Founder</div>
+                <div class="founder-name">Ravi Shankar Bera</div>
+                <div class="founder-title">Founder & CEO</div>
+                <p class="founder-bio">Visionary in scaling tech teams across three continents. With over 10 years in
+                    enterprise software and a passion for connecting world-class talent with ambitious startups, Ravi
+                    Shankar Bera built Stacknity to redefine how companies access and deploy technology.</p>
+                <div class="founder-socials"><a href="#">in</a><a href="#">𝕏</a></div>
+            </div>
+        </div>
+        <div class="team-grid">
+            <div class="team-card reveal">
+                <div class="team-avatar">RK</div>
+                <h4>Riya Kapoor</h4>
+                <div class="role">Chief Technology Officer</div>
+                <div class="expertise">15+ years in distributed systems architecture. Led engineering at 2 unicorn
+                    startups. Expert in microservices & cloud-native solutions.</div>
+            </div>
+            <div class="team-card reveal">
+                <div class="team-avatar">NS</div>
+                <h4>Neil Sharma</h4>
+                <div class="role">Head of Mobile</div>
+                <div class="expertise">Built 40+ mobile apps with 10M+ combined downloads. Specialist in React Native,
+                    Swift, and Kotlin multiplatform development.</div>
+            </div>
+            <div class="team-card reveal">
+                <div class="team-avatar">PL</div>
+                <h4>Priya Lakshmi</h4>
+                <div class="role">Head of Design</div>
+                <div class="expertise">Award-winning UX designer. Former design lead at Figma. Passionate about
+                    accessible, human-centered product experiences.</div>
+            </div>
+            <div class="team-card reveal">
+                <div class="team-avatar">VT</div>
+                <h4>Vikram Thapar</h4>
+                <div class="role">Sourcing Lead</div>
+                <div class="expertise">Talent acquisition expert who has placed 500+ engineers across Fortune 500
+                    companies. Specializes in rapid team scaling.</div>
+            </div>
+            <div class="team-card reveal">
+                <div class="team-avatar">AM</div>
+                <h4>Anita Mukherjee</h4>
+                <div class="role">Digital Strategy Lead</div>
+                <div class="expertise">Growth marketing veteran with $50M+ in managed ad spend. Data-obsessed strategist
+                    driving 3x average ROI for clients.</div>
+            </div>
+            <div class="team-card reveal">
+                <div class="team-avatar">JD</div>
+                <h4>James Desmond</h4>
+                <div class="role">Client Success</div>
+                <div class="expertise">Customer success champion with 99% retention rate. Ensures every partnership
+                    delivers measurable business outcomes.</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="cta">
+        <div class="cta-box reveal">
+            <h2>Ready to build<br>something extraordinary?</h2>
+            <p>Let's discuss your project. Our team is ready to architect the perfect solution for your business — no
+                matter the scale.</p>
+            <div class="cta-actions">
+                <a href="#" class="btn-primary">Schedule a Call <span>→</span></a>
+                <a href="#" class="btn-cta-secondary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                    hello@stacknity.com
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="ecosystem">
+        <div class="ecosystem-inner reveal">
+            <div class="ecosystem-text">
+                <h3>Stacknity Ecosystem</h3>
+                <p>Proud member of the Stacknity Group. Building synergies across Tech, AI, and Advisory.</p>
+            </div>
+            <div class="ecosystem-logos">
+                <a href="#" class="eco-logo"><span class="dot"></span> Stacknity.ai</a>
+                <a href="#" class="eco-logo"><span class="dot"></span> RSB & Co.</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <svg class="logo-icon" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="footerGrad1" x1="0%" y1="50%" x2="100%" y2="50%">
+                                <stop offset="0%" stop-color="#00E5FF" />
+                                <stop offset="40%" stop-color="#00b8d4" />
+                                <stop offset="60%" stop-color="#6B3FA0" />
+                                <stop offset="100%" stop-color="#8A2BE2" />
+                            </linearGradient>
+                            <linearGradient id="footerGrad2" x1="0%" y1="50%" x2="100%" y2="50%">
+                                <stop offset="0%" stop-color="#8A2BE2" />
+                                <stop offset="40%" stop-color="#6B3FA0" />
+                                <stop offset="60%" stop-color="#00b8d4" />
+                                <stop offset="100%" stop-color="#00E5FF" />
+                            </linearGradient>
+                            <filter id="footerGlow">
+                                <feGaussianBlur stdDeviation="2" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <path d="M100 50 C78 78, 28 85, 12 62 C-4 39, 10 12, 40 12 C58 12, 78 25, 100 50"
+                            stroke="url(#footerGrad1)" stroke-width="8" fill="none" stroke-linecap="round"
+                            filter="url(#footerGlow)" />
+                        <path d="M100 50 C122 22, 172 15, 188 38 C204 61, 190 88, 160 88 C142 88, 122 75, 100 50"
+                            stroke="url(#footerGrad2)" stroke-width="8" fill="none" stroke-linecap="round"
+                            filter="url(#footerGlow)" />
+                        <circle cx="100" cy="50" r="5" fill="white" opacity="0.7" />
+                    </svg>
+                    <div class="logo-text">
+                        <span class="logo-glass">Stacknity</span>
+                        <small>Technologies</small>
+                    </div>
+                </a>
+                <p>Building digital empires with precision engineering and elite talent deployment. Based in Oslo.
+                    Operating globally.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4><a href="#">Mobile Development</a><a href="#">Web Platforms</a><a href="#">Digital
+                    Marketing</a><a href="#">Staff Augmentation</a>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4><a href="#">About Us</a><a href="#">Careers</a><a href="#">Blog</a><a
+                    href="#">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie
+                    Policy</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2018 Stacknity Technologies. All rights reserved.</p>
+            <p>Part of the Stacknity Group</p>
+        </div>
+    </footer>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+        }
+    }
+    </script>
+
+    <script type="module" src="assets/js/main.js"></script>
+</body>
+
+</html>
