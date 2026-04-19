@@ -84,11 +84,13 @@ def generate_start_project():
         }
     </style>
 
-    <script>
+    <script type="module">
+        import * as THREE from 'three';
+
         // Localized 3D Asset for the Form Geometry
         document.addEventListener('DOMContentLoaded', () => {
             const container = document.getElementById('form-3d-canvas');
-            if (!container || typeof THREE === 'undefined') return;
+            if (!container) return;
 
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
