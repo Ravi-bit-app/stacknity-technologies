@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stacknity Technologies — Premium Tech Solutions & Elite Engineering</title>
+    <meta name="description"
+        content="Stacknity Technologies architects scalable technology solutions and deploys elite engineering teams. Mobile apps, web platforms, digital marketing & staff augmentation.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <canvas id="bg-canvas"></canvas>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="noise-overlay"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <div class="trust-ribbon">
+        <span>⚡ Trusted by 495+ Global Clients & Enterprises</span>
+    </div>
+
+    <nav id="mainNav">
+        <a href="#" class="logo">
+            <svg class="logo-icon" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="logoGrad1" x1="0%" y1="50%" x2="100%" y2="50%">
+                        <stop offset="0%" stop-color="#00E5FF" />
+                        <stop offset="40%" stop-color="#00b8d4" />
+                        <stop offset="60%" stop-color="#6B3FA0" />
+                        <stop offset="100%" stop-color="#8A2BE2" />
+                    </linearGradient>
+                    <linearGradient id="logoGrad2" x1="0%" y1="50%" x2="100%" y2="50%">
+                        <stop offset="0%" stop-color="#8A2BE2" />
+                        <stop offset="40%" stop-color="#6B3FA0" />
+                        <stop offset="60%" stop-color="#00b8d4" />
+                        <stop offset="100%" stop-color="#00E5FF" />
+                    </linearGradient>
+                    <filter id="logoGlow">
+                        <feGaussianBlur stdDeviation="2" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                </defs>
+                <!-- Bottom ribbon (drawn first, appears behind at crossing) -->
+                <path d="M100 50 C78 78, 28 85, 12 62 C-4 39, 10 12, 40 12 C58 12, 78 25, 100 50"
+                    stroke="url(#logoGrad1)" stroke-width="8" fill="none" stroke-linecap="round"
+                    filter="url(#logoGlow)" />
+                <!-- Top ribbon (drawn second, appears in front at crossing) -->
+                <path d="M100 50 C122 22, 172 15, 188 38 C204 61, 190 88, 160 88 C142 88, 122 75, 100 50"
+                    stroke="url(#logoGrad2)" stroke-width="8" fill="none" stroke-linecap="round"
+                    filter="url(#logoGlow)" />
+                <!-- Center intersection glow -->
+                <circle cx="100" cy="50" r="5" fill="white" opacity="0.8">
+                    <animate attributeName="r" values="4;6;4" dur="2.5s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" repeatCount="indefinite" />
+                </circle>
+            </svg>
+            <div class="logo-text">
+                <span class="logo-glass">Stacknity</span>
+                <small>Technologies</small>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#process">How We Work</a>
+            <a href="#team">Team</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#cta" class="nav-cta">Get Started</a>
+        </div>
+        <div class="mobile-toggle" id="mobileToggle">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <section class="hero" style="min-height: 50vh; padding-top: 150px;">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Services</div>
+            <h1>Mobile Development</h1>
+            <p>Premium mobile development solutions engineered with precision to elevate your digital empire.</p>
+        </div>
+    </section>
+
+    <section class="services" style="padding: 100px 5%;">
+        <div class="service-card reveal" style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <img src="assets/images/mobile-development-hero.png" alt="Mobile Development" style="width: 100%; border-radius: 20px; margin-bottom: 40px; box-shadow: 0 20px 40px rgba(0,229,255,0.1);">
+            <h2>Empowering your mobile development journey</h2>
+            <p style="color: rgba(255,255,255,0.7); font-size: 1.1rem; line-height: 1.8;">Our expert team is ready to deploy state-of-the-art strategies and robust architectures tailored for your specific needs in Mobile Development. Partner with Stacknity to redefine industry standards.</p>
+        </div>
+    </section>
+
+<footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <svg class="logo-icon" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="footerGrad1" x1="0%" y1="50%" x2="100%" y2="50%">
+                                <stop offset="0%" stop-color="#00E5FF" />
+                                <stop offset="40%" stop-color="#00b8d4" />
+                                <stop offset="60%" stop-color="#6B3FA0" />
+                                <stop offset="100%" stop-color="#8A2BE2" />
+                            </linearGradient>
+                            <linearGradient id="footerGrad2" x1="0%" y1="50%" x2="100%" y2="50%">
+                                <stop offset="0%" stop-color="#8A2BE2" />
+                                <stop offset="40%" stop-color="#6B3FA0" />
+                                <stop offset="60%" stop-color="#00b8d4" />
+                                <stop offset="100%" stop-color="#00E5FF" />
+                            </linearGradient>
+                            <filter id="footerGlow">
+                                <feGaussianBlur stdDeviation="2" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <path d="M100 50 C78 78, 28 85, 12 62 C-4 39, 10 12, 40 12 C58 12, 78 25, 100 50"
+                            stroke="url(#footerGrad1)" stroke-width="8" fill="none" stroke-linecap="round"
+                            filter="url(#footerGlow)" />
+                        <path d="M100 50 C122 22, 172 15, 188 38 C204 61, 190 88, 160 88 C142 88, 122 75, 100 50"
+                            stroke="url(#footerGrad2)" stroke-width="8" fill="none" stroke-linecap="round"
+                            filter="url(#footerGlow)" />
+                        <circle cx="100" cy="50" r="5" fill="white" opacity="0.7" />
+                    </svg>
+                    <div class="logo-text">
+                        <span class="logo-glass">Stacknity</span>
+                        <small>Technologies</small>
+                    </div>
+                </a>
+                <p>Building digital empires with precision engineering and elite talent deployment. Based in Oslo.
+                    Operating globally.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4><a href="#">Mobile Development</a><a href="#">Web Platforms</a><a href="#">Digital
+                    Marketing</a><a href="#">Staff Augmentation</a>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4><a href="#">About Us</a><a href="#">Careers</a><a href="#">Blog</a><a
+                    href="#">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Cookie
+                    Policy</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2018 Stacknity Technologies. All rights reserved.</p>
+            <p>Part of the Stacknity Group</p>
+        </div>
+    </footer>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+        }
+    }
+    </script>
+
+    <script type="module" src="assets/js/main.js"></script>
+</body>
+
+</html>

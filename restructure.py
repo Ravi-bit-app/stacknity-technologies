@@ -16,7 +16,27 @@ def restructure_all():
     all_styles = set()
     all_scripts = set()
 
-    # Pass 1: Collect
+    # SAFETY: Read existing assets to avoid data loss
+    style_path = 'assets/css/style.css'
+    if os.path.exists(style_path):
+        with open(style_path, 'r', encoding='utf-8') as f:
+            # We treat the existing file as a single "block" or we can split it.
+            # Splitting by comments or double newlines is safer for deduplication.
+            existing_styles = f.read().split("\n\n")
+            for s in existing_styles:
+                if s.strip():
+                    all_styles.add(s.strip())
+
+    js_path = 'assets/js/main.js'
+    if os.path.exists(js_path):
+        with open(js_path, 'r', encoding='utf-8') as f:
+            existing_js = f.read()
+            # Remove the default import line if we're going to re-add it
+            existing_js = re.sub(r"import .* from 'three';", "", existing_js).strip()
+            if existing_js:
+                all_scripts.add(existing_js)
+
+    # Pass 1: Collect from HTML
     for html_file in html_files:
         with open(html_file, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -24,12 +44,14 @@ def restructure_all():
         # Extract <style> contents
         styles = re.findall(r'<style>(.*?)</style>', content, re.DOTALL)
         for s in styles:
-            all_styles.add(s.strip())
+            if s.strip():
+                all_styles.add(s.strip())
             
         # Extract internal <script> (NOT importmap, NOT src)
         scripts = re.findall(r'<script(?![^>]*src=)(?![^>]*type="importmap")[^>]*>(.*?)</script>', content, re.DOTALL)
         for s in scripts:
             if s.strip():
+                # Avoid adding the exact same logic multiple times
                 all_scripts.add(s.strip())
 
     # Save assets
@@ -37,9 +59,9 @@ def restructure_all():
     os.makedirs('assets/js', exist_ok=True)
 
     if all_styles:
-        styles_content = "\n\n".join(sorted(list(all_styles)))
-        with open('assets/css/style.css', 'w', encoding='utf-8') as f:
-            f.write(styles_content)
+        # Deduplicate and sort
+        with open(style_path, 'w', encoding='utf-8') as f:
+            f.write("\n\n".join(sorted(list(all_styles))))
 
     if all_scripts:
         js_content = "import * as THREE from 'three';\n\n"
@@ -49,7 +71,7 @@ def restructure_all():
             if cleaned:
                 cleaned_scripts.append(cleaned)
         js_content += "\n\n".join(cleaned_scripts)
-        with open('assets/js/main.js', 'w', encoding='utf-8') as f:
+        with open(js_path, 'w', encoding='utf-8') as f:
             f.write(js_content)
 
     # Pass 2: Clean HTML and Inject Import Map
@@ -66,26 +88,21 @@ def restructure_all():
             if '<head>' in content:
                 content = content.replace('<head>', f'<head>\n{IMPORT_MAP}')
             else:
-                # Fallback if no head tag
                 content = IMPORT_MAP + "\n" + content
 
         # 3. Ensure CSS link
         if 'assets/css/style.css' not in content:
             if '</head>' in content:
                 content = content.replace('</head>', '    <link rel="stylesheet" href="assets/css/style.css">\n</head>')
-            else:
-                content = '<link rel="stylesheet" href="assets/css/style.css">\n' + content
 
-        # 4. Ensure JS module link at bottom
+        # 4. Ensure JS module link
         if 'assets/js/main.js' not in content:
             if '</body>' in content:
                 content = content.replace('</body>', '    <script type="module" src="assets/js/main.js"></script>\n</body>')
-            else:
-                content = content + '\n<script type="module" src="assets/js/main.js"></script>'
         
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(content)
-        print(f"Verified & Restructured {file_path}")
+        print(f"Secured & Restructured {file_path}")
 
 if __name__ == "__main__":
     restructure_all()
