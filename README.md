@@ -17,13 +17,29 @@ Stacknity Group is focused on building digital empires through scalable technolo
 This project has been modularized for clean maintainability:
 
 ```text
-├── index.html            # Main HTML entry point
+├── index.html                  # Main HTML entry point
 ├── assets/
 │   ├── css/
-│   │   └── style.css     # All global styling, animations, and design tokens
-│   └── js/
-│       └── main.js       # Core logic, Three.js 3D rendering, and UI interactions
-└── README.md             # Project documentation
+│   │   └── style.css           # Global styling, animations, design tokens
+│   ├── js/
+│   │   └── main.js             # Core logic, Three.js 3D rendering
+│   └── images/                 # Generated hero assets and images
+├── mobile-development.html     # Service page
+├── web-platforms.html          # Service page
+├── digital-marketing.html      # Service page
+├── staff-augmentation.html     # Service page
+├── about-us.html               # Company page
+├── careers.html                # Company page
+├── blog.html                   # Company page
+├── contact.html                # Company page
+├── privacy-policy.html         # Legal page
+├── terms-of-service.html       # Legal page
+├── cookie-policy.html          # Legal page
+├── generate_pages.py           # Boilerplate generation script
+├── move_images.py              # Script to manage assets
+├── fix_images.py               # Script to cleanup text-centric pages
+├── restructure.py              # Script for extracting inline CSS/JS
+└── README.md                   # Project documentation
 ```
 
 ## 🚀 Getting Started
