@@ -234,8 +234,6 @@ def update_links():
         
         content = re.sub(email_block_pattern, email_replacement, content, flags=re.IGNORECASE|re.DOTALL)
         
-        # Another case where email is just typed text: "hello@stacknity.com" -> just do it globally if we missed it
-        
         with open(file, 'w', encoding='utf-8') as f:
             f.write(content)
             
