@@ -5,19 +5,26 @@
  */
 
 :root {
-    --primary: #0B1E33;
-    --cyan: #00E5FF;
-    --violet: #8A2BE2;
-    --bg: #060a14;
-    --dark: #060d18;
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.06);
-    --glass-bg-hover: rgba(255, 255, 255, 0.06);
-    --text-primary: #e8ecf4;
-    --text-secondary: rgba(255, 255, 255, 0.55);
-    --text-muted: rgba(255, 255, 255, 0.35);
-    --glow-cyan: rgba(0, 229, 255, 0.15);
-    --glow-violet: rgba(138, 43, 226, 0.15);
+    /* The Celestial Monolith Palette */
+    --primary: #e1fdff;
+    --secondary: #d2bbff;
+    --cyan: #00f2ff;
+    --violet: #7c3aed;
+    --bg: #0c141f; /* Base Surface */
+    --surface-low: #151c27;
+    --surface-high: #232a36;
+    --surface-lowest: #070e19;
+    --outline-variant: rgba(58, 73, 75, 0.2);
+    
+    /* Text tokens */
+    --text-primary: #e1fdff;
+    --text-secondary: #b0c4de;
+    --text-muted: rgba(176, 196, 222, 0.5);
+    
+    /* Effects */
+    --glass-bg: rgba(46, 53, 65, 0.4); /* surface_variant at 40% */
+    --glass-blur: blur(12px);
+    --ambient-glow: 0 0 40px rgba(0, 219, 231, 0.04);
 }
 
 * {
@@ -28,14 +35,16 @@
 
 html {
     scroll-behavior: smooth;
+    font-size: 16px;
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Manrope', 'Inter', sans-serif;
     background: var(--bg);
     color: var(--text-primary);
+    line-height: 1.6;
     overflow-x: hidden;
-    cursor: none; /* Hide default cursor for custom one */
+    cursor: none;
 }
 
 /* Base Canvas */
@@ -347,14 +356,14 @@ nav.scrolled {
     height: 100%;
 }
 
-/* Stats Bar */
+/* Stats Bar - Tonal Emphasis */
 .stats-bar {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    padding: 40px 8%;
-    background: rgba(255, 255, 255, 0.02);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    padding: 80px 8%;
+    background: var(--surface-low);
+    position: relative;
+    z-index: 2;
 }
 
 .stat-card {
@@ -376,64 +385,99 @@ nav.scrolled {
     letter-spacing: 1px;
 }
 
-/* Services */
+/* Services - Surface Nesting & Luminescent Accents */
 .services {
-    padding: 120px 8%;
-}
-
-.section-label {
-    color: var(--cyan);
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 16px;
-}
-
-.section-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(32px, 4vw, 56px);
-    line-height: 1.1;
-    margin-bottom: 60px;
-}
-
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-}
-
-.service-card {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    padding: 50px;
-    border-radius: 24px;
-    backdrop-filter: blur(20px);
-    transition: all 0.4s;
+    padding: 160px 8%;
     position: relative;
     overflow: hidden;
 }
 
+.services::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: -10%;
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.service-card {
+    background: var(--surface-low);
+    padding: 60px 40px;
+    border-radius: 24px;
+    backdrop-filter: var(--glass-blur);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    border: 1px solid var(--outline-variant);
+    position: relative;
+}
+
 .service-card:hover {
-    transform: translateY(-10px);
-    background: var(--glass-bg-hover);
-    border-color: rgba(0, 229, 255, 0.2);
+    transform: translateY(-12px) scale(1.02);
+    background: var(--surface-high);
+    box-shadow: var(--ambient-glow);
+}
+
+.service-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--cyan), var(--violet), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.service-card:hover::after {
+    opacity: 0.3;
 }
 
 .service-icon-wrap {
-    font-size: 40px;
-    margin-bottom: 24px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-high);
+    border-radius: 20px;
+    font-size: 32px;
+    margin-bottom: 32px;
+    transition: 0.4s;
+    box-shadow: inset 0 0 20px rgba(0, 242, 255, 0.05);
+}
+
+.service-card:hover .service-icon-wrap {
+    background: linear-gradient(135deg, var(--cyan), var(--violet));
+    color: var(--surface-lowest);
+    transform: rotate(10deg);
 }
 
 .service-card h3 {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 24px;
-    margin-bottom: 16px;
+    font-size: 28px;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
 }
 
 .service-card p {
     color: var(--text-secondary);
-    line-height: 1.6;
+    font-size: 16px;
+    line-height: 1.7;
 }
 
 /* Animations */
@@ -541,35 +585,312 @@ nav.scrolled {
     margin: 0 8%;
 }
 
+/* Process - Asymmetrical Rhythm & Ghost Borders */
+.process {
+    padding: 160px 8%;
+    background: var(--surface-lowest);
+    position: relative;
+}
+
+.process::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    right: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.03) 0%, transparent 70%);
+}
+
 .process-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-    margin-top: 60px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 60px;
+    margin-top: 80px;
 }
 
 .process-step {
-    padding: 30px;
-    background: rgba(255,255,255,0.02);
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.05);
+    padding: 0;
+    background: transparent;
+    border: none;
+    position: relative;
+    transition: 0.4s;
+}
+
+/* Asymmetry */
+.process-step:nth-child(even) {
+    transform: translateY(40px);
 }
 
 .process-number {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 32px;
+    font-size: 80px;
+    font-weight: 800;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(0, 242, 255, 0.15);
+    margin-bottom: -30px;
+    transition: 0.4s;
+    display: block;
+}
+
+.process-step:hover .process-number {
+    color: var(--cyan);
+    -webkit-text-stroke: 1px var(--cyan);
+    text-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
+    transform: scale(1.1) translateX(10px);
+}
+
+.process-step h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: white;
+    position: relative;
+    z-index: 2;
+}
+
+.process-step p {
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 90%;
+}
+
+/* Testimonials - Ambient Shadows & High-End Typography */
+.testimonials {
+    padding: 160px 8%;
+}
+
+.testimonials-track {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+}
+
+.testimonial-card {
+    background: var(--surface-low);
+    padding: 50px;
+    border-radius: 32px;
+    border: 1px solid var(--outline-variant);
+    transition: 0.5s;
+}
+
+.testimonial-card:hover {
+    box-shadow: var(--ambient-glow);
+    border-color: rgba(124, 58, 237, 0.2);
+}
+
+.testimonial-text {
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.8;
+    color: white;
+    margin-bottom: 32px;
+    position: relative;
+}
+
+.testimonial-text::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    font-size: 60px;
+    color: var(--cyan);
+    opacity: 0.2;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.testimonial-avatar {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--surface-high), var(--surface-lowest));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: 700;
     color: var(--cyan);
+    border: 1px solid var(--outline-variant);
+}
+
+/* Team - Cyber-ID & Recursive Depth */
+.team {
+    padding: 160px 8%;
+    position: relative;
+}
+
+.team::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(0, 242, 255, 0.02) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.team-card {
+    background: var(--surface-low);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid var(--outline-variant);
+    transition: 0.4s;
+    overflow: hidden;
+}
+
+.team-card:hover {
+    background: var(--surface-high);
+    border-color: var(--cyan);
+    transform: translateY(-5px);
+}
+
+.team-avatar {
+    width: 100px;
+    height: 100px;
+    background: var(--surface-lowest);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--cyan);
+    margin-bottom: 24px;
+    border: 1px solid var(--outline-variant);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.team-card h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.team-card .role {
+    color: var(--cyan);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
     margin-bottom: 20px;
-    opacity: 0.5;
+    display: block;
+    font-weight: 700;
+}
+
+.team-card .expertise {
+    padding: 20px;
+    background: var(--surface-lowest);
+    border-radius: 12px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* CTA - Kinetic Triggers & Negative Space */
+.cta-section {
+    padding: 160px 8%;
 }
 
 .cta-box {
-    background: linear-gradient(135deg, rgba(0, 229, 255, 0.05), rgba(138, 43, 226, 0.05));
-    border: 1px solid rgba(0, 229, 255, 0.1);
-    padding: 80px 40px;
-    border-radius: 40px;
-    backdrop-filter: blur(30px);
+    background: var(--surface-low);
+    padding: 100px 60px;
+    border-radius: 48px;
+    text-align: center;
+    border: 1px solid var(--outline-variant);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(40px);
+}
+
+.cta-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(0, 242, 255, 0.05) 0%, transparent 60%);
+}
+
+.cta-box h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(32px, 5vw, 64px);
+    line-height: 1.1;
+    margin-bottom: 32px;
+    letter-spacing: -2px;
+}
+
+.cta-box p {
+    font-size: 20px;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto 48px;
+    line-height: 1.6;
+}
+
+/* Ecosystem - Global Strip */
+.ecosystem {
+    background: var(--surface-lowest);
+    padding: 60px 8%;
+    border-top: 1px solid var(--outline-variant);
+    border-bottom: 1px solid var(--outline-variant);
+}
+
+.ecosystem-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.ecosystem-text h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.ecosystem-logos {
+    display: flex;
+    gap: 32px;
+}
+
+.eco-logo {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: 0.3s;
+}
+
+.eco-logo .dot {
+    width: 8px;
+    height: 8px;
+    background: var(--outline-variant);
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.eco-logo:hover {
+    color: white;
+}
+
+.eco-logo:hover .dot {
+    background: var(--cyan);
+    box-shadow: 0 0 10px var(--cyan);
 }
 
 footer {
