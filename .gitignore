@@ -1,0 +1,26 @@
+# Git Ignore
+# ZIP backups
+*.zip
+stacknity-technologies-backup.zip
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Assistant Artifacts
+task.md
+implementation_plan.md
+walkthrough.md
+*.png
+*.webp
+*.log
+backup_recovery/
+restructure.py
+generate_pages.py
+fix_images.py
+move_images.py
+connect_links.py
