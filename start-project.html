@@ -113,19 +113,21 @@
                 <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: clamp(24px, 4vw, 40px); margin-bottom: 8px; color: white;">Connect with <span style="background: linear-gradient(135deg, var(--cyan), var(--violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Stacknity</span></h2>
                 <p style="color: var(--text-secondary); margin-bottom: 40px; font-size: 16px;">Secure architecture. Premium design. Flawless execution.</p>
                 
-                <form action="#" method="POST" class="monolith-form">
+                <!-- CONFIGURED FOR EMAIL (Stacknity.technologies@gmail.com) via Formspree -->
+                <!-- Please replace 'mnnjlqov' with your actual Formspree endpoint ID if you have one -->
+                <form action="https://formspree.io/f/mnnjlqov" method="POST" class="monolith-form">
                     <div class="input-group">
-                        <input type="text" id="name" class="monolith-input" placeholder=" " required>
+                        <input type="text" name="Full Name" id="name" class="monolith-input" placeholder=" " required>
                         <label for="name" class="input-label">Your Full Name</label>
                     </div>
 
                     <div class="input-group">
-                        <input type="email" id="email" class="monolith-input" placeholder=" " required>
+                        <input type="email" name="Email" id="email" class="monolith-input" placeholder=" " required>
                         <label for="email" class="input-label">Work Email Address</label>
                     </div>
                     
                     <div class="input-group">
-                        <select id="budget" class="monolith-input monolith-select" required>
+                        <select name="Budget Range" id="budget" class="monolith-input monolith-select" required>
                             <option value="" disabled selected></option>
                             <option value="10k-25k" style="background: var(--bg);">$10,000 - $25,000</option>
                             <option value="25k-50k" style="background: var(--bg);">$25,000 - $50,000</option>
@@ -135,12 +137,12 @@
                     </div>
 
                     <div class="input-group">
-                        <textarea id="details" class="monolith-input monolith-textarea" placeholder=" " required></textarea>
+                        <textarea name="Project Details" id="details" class="monolith-input monolith-textarea" placeholder=" " required></textarea>
                         <label for="details" class="input-label">Project Details</label>
                     </div>
 
                     <button type="submit" class="btn-primary" style="margin-top: 10px; width: 100%; justify-content: center;">Initialize Project <span style="margin-left: 12px;">→</span></button>
-                    <p style="font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 16px;">By submitting, you agree to our Privacy Policy.</p>
+                    <p style="font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 16px;">Direct submission to Stacknity.technologies@gmail.com</p>
                 </form>
             </div>
         </div>
