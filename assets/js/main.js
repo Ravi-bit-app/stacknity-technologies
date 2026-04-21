@@ -316,6 +316,128 @@ class TechScene {
     }
 }
 
+// Architect Carousel & 3D Asset Engine
+class ArchitectCarousel {
+    constructor() {
+        this.track = document.getElementById('architectTrack');
+        this.prevBtn = document.getElementById('prevBtn');
+        this.nextBtn = document.getElementById('nextBtn');
+        this.canvases = document.querySelectorAll('.architect-canvas');
+        
+        if (!this.track) return;
+
+        this.initNavigation();
+        this.init3DScenes();
+    }
+
+    initNavigation() {
+        const scrollAmount = 360; // Card width + gap
+        this.nextBtn?.addEventListener('click', () => {
+            this.track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+        this.prevBtn?.addEventListener('click', () => {
+            this.track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+
+        // Mouse Drag Interaction
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        this.track.addEventListener('mousedown', (e) => {
+            isDown = true;
+            this.track.classList.add('active');
+            startX = e.pageX - this.track.offsetLeft;
+            scrollLeft = this.track.scrollLeft;
+        });
+        this.track.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+        this.track.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+        this.track.addEventListener('mousemove', (e) => {
+            if(!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - this.track.offsetLeft;
+            const walk = (x - startX) * 2;
+            this.track.scrollLeft = scrollLeft - walk;
+        });
+    }
+
+    init3DScenes() {
+        this.scenes = [];
+        const config = {
+            core: (scene) => {
+                const geo = new THREE.TorusKnotGeometry(1.2, 0.3, 100, 16);
+                const mat = new THREE.MeshStandardMaterial({ color: 0x00E5FF, wireframe: true, emissive: 0x00E5FF, emissiveIntensity: 0.5 });
+                const mesh = new THREE.Mesh(geo, mat);
+                scene.add(mesh);
+                return mesh;
+            },
+            mesh: (scene) => {
+                const geo = new THREE.IcosahedronGeometry(1.5, 1);
+                const mat = new THREE.MeshStandardMaterial({ color: 0x8A2BE2, wireframe: true, emissive: 0x8A2BE2, emissiveIntensity: 0.5 });
+                const mesh = new THREE.Mesh(geo, mat);
+                scene.add(mesh);
+                return mesh;
+            },
+            prism: (scene) => {
+                const geo = new THREE.OctahedronGeometry(1.5, 0);
+                const mat = new THREE.MeshStandardMaterial({ color: 0xFF0080, wireframe: true, emissive: 0xFF0080, emissiveIntensity: 0.5 });
+                const mesh = new THREE.Mesh(geo, mat);
+                scene.add(mesh);
+                return mesh;
+            },
+            nodes: (scene) => {
+                const geo = new THREE.SphereGeometry(1.3, 8, 8);
+                const mat = new THREE.PointsMaterial({ color: 0x00E5FF, size: 0.05 });
+                const mesh = new THREE.Points(geo, mat);
+                scene.add(mesh);
+                return mesh;
+            },
+            ring: (scene) => {
+                const geo = new THREE.TorusGeometry(1.4, 0.05, 16, 100);
+                const mat = new THREE.MeshBasicMaterial({ color: 0x00E5FF, transparent: true, opacity: 0.6 });
+                const mesh = new THREE.Mesh(geo, mat);
+                scene.add(mesh);
+                return mesh;
+            }
+        };
+
+        this.canvases.forEach(canvas => {
+            const type = canvas.getAttribute('data-asset') || 'core';
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            const light = new THREE.PointLight(0xffffff, 5, 10);
+            light.position.set(2, 2, 5);
+            scene.add(light);
+            scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+
+            const mesh = config[type](scene);
+            this.scenes.push({ renderer, scene, camera, mesh, canvas });
+        });
+
+        this.animate();
+    }
+
+    animate() {
+        requestAnimationFrame(() => this.animate());
+        this.scenes.forEach(s => {
+            // Only render if card is visible could be optimized with IntersectionObserver
+            s.mesh.rotation.y += 0.01;
+            s.mesh.rotation.x += 0.005;
+            s.renderer.render(s.scene, s.camera);
+        });
+    }
+}
+
 // Stats counter logic
 function initCounters() {
     const counters = document.querySelectorAll('.counter');
@@ -393,6 +515,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initScrollReveal();
     initCursor();
+    new ArchitectCarousel();
     
     // Scroll progress
     const progress = document.getElementById('scrollProgress');
