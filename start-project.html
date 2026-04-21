@@ -99,48 +99,48 @@
         </div>
     </section>
 
-    <section class="services" style="padding: 50px 5% 100px; display: flex; justify-content: center;">
-        <div class="split-container" style="display: flex; flex-wrap: wrap; max-width: 1200px; width: 100%; gap: 40px; background: rgba(255,255,255,0.02); border-radius: 24px; border: 1px solid rgba(255,255,255,0.05); padding: 40px; backdrop-filter: blur(20px);">
+    <section class="services" style="padding: 100px 8%;">
+        <div class="split-container reveal">
             
             <!-- LEFT: 3D Asset Area -->
-            <div class="3d-area" style="flex: 1; min-width: 300px; border-radius: 16px; background: rgba(0,0,0,0.3); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 400px; box-shadow: inset 0 0 50px rgba(0,229,255,0.05);">
-                <div id="form-3d-canvas" style="width: 100%; height: 100%; position: absolute; top:0; left:0;"></div>
-                <div style="position: absolute; bottom: 20px; left: 20px; color: rgba(255,255,255,0.4); font-size: 12px; pointer-events: none;">Interactive WebGL Element</div>
+            <div class="3d-area">
+                <div id="form-3d-canvas"></div>
+                <div style="position: absolute; bottom: 30px; left: 30px; color: var(--cyan); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: 0.5;">Project Core v1.0</div>
             </div>
 
             <!-- RIGHT: Glassmorphism Form -->
-            <div class="form-area" style="flex: 1; min-width: 350px; display: flex; flex-direction: column; justify-content: center;">
-                <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 32px; margin-bottom: 10px; color: white;">Connect with <span style="background: linear-gradient(135deg, #00E5FF, #8A2BE2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Stacknity</span></h2>
-                <p style="color: rgba(255,255,255,0.55); margin-bottom: 30px; font-size: 15px;">Secure architecture. Premium design. Flawless execution.</p>
+            <div class="form-area">
+                <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: clamp(24px, 4vw, 40px); margin-bottom: 8px; color: white;">Connect with <span style="background: linear-gradient(135deg, var(--cyan), var(--violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Stacknity</span></h2>
+                <p style="color: var(--text-secondary); margin-bottom: 40px; font-size: 16px;">Secure architecture. Premium design. Flawless execution.</p>
                 
-                <form action="#" method="POST" style="display: flex; flex-direction: column; gap: 20px;">
-                    <div style="position: relative;">
-                        <input type="text" id="name" placeholder=" " required style="width: 100%; padding: 18px 20px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: white; outline: none; transition: all 0.3s; font-family: 'Inter', sans-serif;" onfocus="this.style.borderColor='#00E5FF'; this.style.background='rgba(0,229,255,0.05)';" onblur="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.background='rgba(255,255,255,0.04)';">
-                        <label for="name" style="position: absolute; left: 20px; top: 18px; color: rgba(255,255,255,0.4); pointer-events: none; transition: 0.3s; font-size: 15px;">Your Full Name</label>
+                <form action="#" method="POST" class="monolith-form">
+                    <div class="input-group">
+                        <input type="text" id="name" class="monolith-input" placeholder=" " required>
+                        <label for="name" class="input-label">Your Full Name</label>
                     </div>
 
-                    <div style="position: relative;">
-                        <input type="email" id="email" placeholder=" " required style="width: 100%; padding: 18px 20px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: white; outline: none; transition: all 0.3s; font-family: 'Inter', sans-serif;" onfocus="this.style.borderColor='#8A2BE2'; this.style.background='rgba(138,43,226,0.05)';" onblur="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.background='rgba(255,255,255,0.04)';">
-                        <label for="email" style="position: absolute; left: 20px; top: 18px; color: rgba(255,255,255,0.4); pointer-events: none; transition: 0.3s; font-size: 15px;">Work Email Address</label>
+                    <div class="input-group">
+                        <input type="email" id="email" class="monolith-input" placeholder=" " required>
+                        <label for="email" class="input-label">Work Email Address</label>
                     </div>
                     
-                    <div style="position: relative;">
-                        <select id="budget" required style="width: 100%; padding: 18px 20px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); outline: none; transition: all 0.3s; font-family: 'Inter', sans-serif; appearance: none; cursor: pointer;" onfocus="this.style.borderColor='#00E5FF';" onblur="this.style.borderColor='rgba(255,255,255,0.1)';">
-                            <option value="" disabled selected>Select Budget Range</option>
-                            <option value="10k-25k" style="background: #0B1E33;">$10,000 - $25,000</option>
-                            <option value="25k-50k" style="background: #0B1E33;">$25,000 - $50,000</option>
-                            <option value="50k+" style="background: #0B1E33;">$50,000+</option>
+                    <div class="input-group">
+                        <select id="budget" class="monolith-input monolith-select" required>
+                            <option value="" disabled selected></option>
+                            <option value="10k-25k" style="background: var(--bg);">$10,000 - $25,000</option>
+                            <option value="25k-50k" style="background: var(--bg);">$25,000 - $50,000</option>
+                            <option value="50k+" style="background: var(--bg);">$50,000+</option>
                         </select>
-                        <div style="position: absolute; right: 20px; top: 18px; pointer-events: none; color: rgba(255,255,255,0.5);">▼</div>
+                        <label for="budget" class="input-label">Select Budget Range</label>
                     </div>
 
-                    <div style="position: relative;">
-                        <textarea id="details" placeholder=" " required rows="4" style="width: 100%; padding: 18px 20px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: white; outline: none; transition: all 0.3s; font-family: 'Inter', sans-serif; resize: vertical;" onfocus="this.style.borderColor='#8A2BE2'; this.style.background='rgba(138,43,226,0.05)';" onblur="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.background='rgba(255,255,255,0.04)';"></textarea>
-                        <label for="details" style="position: absolute; left: 20px; top: 18px; color: rgba(255,255,255,0.4); pointer-events: none; transition: 0.3s; font-size: 15px;">Project Details</label>
+                    <div class="input-group">
+                        <textarea id="details" class="monolith-input monolith-textarea" placeholder=" " required></textarea>
+                        <label for="details" class="input-label">Project Details</label>
                     </div>
 
-                    <button type="submit" class="btn-primary" style="align-self: flex-start; border: none; cursor: pointer; padding: 18px 40px; font-size: 16px; margin-top: 10px; width: 100%; justify-content: center;">Initialize Project <span style="margin-left: 8px;">→</span></button>
-                    <p style="font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; margin-top: 10px;">By submitting, you agree to our Privacy Policy.</p>
+                    <button type="submit" class="btn-primary" style="margin-top: 10px; width: 100%; justify-content: center;">Initialize Project <span style="margin-left: 12px;">→</span></button>
+                    <p style="font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 16px;">By submitting, you agree to our Privacy Policy.</p>
                 </form>
             </div>
         </div>

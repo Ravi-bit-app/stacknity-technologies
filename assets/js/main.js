@@ -10,6 +10,7 @@ class TechScene {
     constructor() {
         this.heroContainer = document.getElementById('hero-canvas');
         this.bgContainer = document.getElementById('bg-canvas');
+        this.formContainer = document.getElementById('form-3d-canvas');
         
         if (this.bgContainer) {
             this.initBackground();
@@ -17,6 +18,10 @@ class TechScene {
         
         if (this.heroContainer) {
             this.initHero();
+        }
+
+        if (this.formContainer) {
+            this.initFormAsset();
         }
 
         this.addEventListeners();
@@ -176,6 +181,50 @@ class TechScene {
         this.targetRotationY = 0;
     }
 
+    initFormAsset() {
+        this.formScene = new THREE.Scene();
+        this.formCamera = new THREE.PerspectiveCamera(45, this.formContainer.clientWidth / this.formContainer.clientHeight, 0.1, 1000);
+        this.formRenderer = new THREE.WebGLRenderer({
+            canvas: this.formContainer,
+            alpha: true,
+            antialias: true
+        });
+
+        this.formRenderer.setSize(this.formContainer.clientWidth, this.formContainer.clientHeight);
+        this.formRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Geometric Data Crystal
+        const crystalGeo = new THREE.IcosahedronGeometry(2, 0);
+        const crystalMat = new THREE.MeshStandardMaterial({
+            color: 0x00E5FF,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.8,
+            emissive: 0x8A2BE2,
+            emissiveIntensity: 0.5
+        });
+        
+        this.crystal = new THREE.Mesh(crystalGeo, crystalMat);
+        this.formScene.add(this.crystal);
+
+        // Core points
+        const pointsGeo = new THREE.IcosahedronGeometry(1.9, 1);
+        const pointsMat = new THREE.PointsMaterial({
+            color: 0x00E5FF,
+            size: 0.05
+        });
+        this.crystalPoints = new THREE.Points(pointsGeo, pointsMat);
+        this.formScene.add(this.crystalPoints);
+
+        // Lighting
+        const light = new THREE.PointLight(0x00E5FF, 5, 20);
+        light.position.set(5, 5, 5);
+        this.formScene.add(light);
+        this.formScene.add(new THREE.AmbientLight(0xffffff, 0.5));
+
+        this.formCamera.position.z = 6;
+    }
+
     addEventListeners() {
         window.addEventListener('mousemove', (e) => {
             this.mouseX = (e.clientX / window.innerWidth) - 0.5;
@@ -193,6 +242,13 @@ class TechScene {
                 this.heroCamera.aspect = this.heroContainer.clientWidth / this.heroContainer.clientHeight;
                 this.heroCamera.updateProjectionMatrix();
                 this.heroRenderer.setSize(this.heroContainer.clientWidth, this.heroContainer.clientHeight);
+            }
+
+            // Resize Form Asset
+            if (this.formContainer) {
+                this.formCamera.aspect = this.formContainer.clientWidth / this.formContainer.clientHeight;
+                this.formCamera.updateProjectionMatrix();
+                this.formRenderer.setSize(this.formContainer.clientWidth, this.formContainer.clientHeight);
             }
         });
     }
@@ -243,7 +299,20 @@ class TechScene {
         });
 
         this.bgRenderer.render(this.bgScene, this.bgCamera);
-        this.heroRenderer.render(this.heroScene, this.heroCamera);
+        if (this.heroRenderer) this.heroRenderer.render(this.heroScene, this.heroCamera);
+
+        // Animate Form Asset
+        if (this.formRenderer && this.crystal) {
+            this.crystal.rotation.y += 0.01;
+            this.crystal.rotation.x += 0.005;
+            this.crystalPoints.rotation.y -= 0.005;
+
+            // Parallax
+            this.crystal.position.x += (this.mouseX * 2 - this.crystal.position.x) * 0.1;
+            this.crystal.position.y += (-this.mouseY * 2 - this.crystal.position.y) * 0.1;
+
+            this.formRenderer.render(this.formScene, this.formCamera);
+        }
     }
 }
 
