@@ -13,15 +13,15 @@ class TechScene {
         this.formContainer = document.getElementById('form-3d-canvas');
         
         if (this.bgContainer) {
-            this.initBackground();
+            try { this.initBackground(); } catch(e) { console.error("BG Init Failed", e); }
         }
         
         if (this.heroContainer) {
-            this.initHero();
+            try { this.initHero(); } catch(e) { console.error("Hero Init Failed", e); }
         }
 
         if (this.formContainer) {
-            this.initFormAsset();
+            try { this.initFormAsset(); } catch(e) { console.error("Form Asset Init Failed", e); }
         }
 
         this.addEventListeners();
