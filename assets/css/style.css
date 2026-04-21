@@ -1037,6 +1037,16 @@ nav.scrolled {
     padding: 40px;
     backdrop-filter: var(--glass-blur);
     align-items: stretch;
+    opacity: 1 !important;
+}
+
+#form-section {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative;
+    z-index: 5;
+    background: var(--bg);
 }
 
 .3d-area {
